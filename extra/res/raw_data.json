@@ -1,0 +1,64 @@
+{
+    "events": [
+        {
+            "title": "New Year's Tech Summit",
+            "description": "Kickstart the year with insights into the latest advancements in technology. Connect with industry leaders and visionaries.",
+            "date": "2024-01-05",
+            "fee": 100.00
+        },
+        {
+            "title": "Winter Art Gala",
+            "description": "Celebrate the winter season with a dazzling display of art. Immerse yourself in creativity and elegance at this exclusive art gala.",
+            "date": "2024-01-10",
+            "fee": 25.00
+        },
+        {
+            "title": "Mindfulness Retreat",
+            "description": "Escape the hustle and bustle. Join us for a weekend of mindfulness, meditation, and relaxation to rejuvenate your mind and body.",
+            "date": "2024-01-15",
+            "fee": 50.00
+        },
+        {
+            "title": "Jazz Fusion Night",
+            "description": "Experience the magic of jazz fusion with a night filled with mesmerizing performances by renowned musicians.",
+            "date": "2024-01-20",
+            "fee": 30.00
+        },
+        {
+            "title": "Fitness Challenge Day",
+            "description": "Get active and embrace a healthy lifestyle. Participate in fun fitness challenges and learn about the latest workout trends.",
+            "date": "2024-01-25",
+            "fee": 15.00
+        },
+        {
+            "title": "Foodie Fiesta",
+            "description": "A culinary journey featuring diverse cuisines and gourmet delights. Indulge in a feast for your taste buds.",
+            "date": "2024-01-07",
+            "fee": 40.00
+        },
+        {
+            "title": "Virtual Reality Expo",
+            "description": "Dive into the world of virtual reality. Explore cutting-edge VR technology and experience immersive demonstrations.",
+            "date": "2024-01-12",
+            "fee": 20.00
+        },
+        {
+            "title": "Winter Wonderland Fashion Show",
+            "description": "Witness a spectacular fashion show showcasing the latest winter collections and trends from top designers.",
+            "date": "2024-01-18",
+            "fee": 35.00
+        },
+        {
+            "title": "Startup Accelerator Bootcamp",
+            "description": "For aspiring entrepreneurs: a hands-on bootcamp to accelerate your startup. Learn from industry experts and refine your business strategies.",
+            "date": "2024-01-22",
+            "fee": 75.00
+        },
+        {
+            "title": "Interactive Science Fair",
+            "description": "Explore the wonders of science through interactive exhibits and demonstrations. A family-friendly event for science enthusiasts of all ages.",
+            "date": "2024-01-30",
+            "fee": 10.00
+        }
+    ]
+}
