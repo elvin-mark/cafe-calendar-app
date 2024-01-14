@@ -1,15 +1,32 @@
 import { Grow, Paper, ClickAwayListener, Button, Popper, MenuItem, MenuList } from '@mui/material';
 import { EventDetail } from './core/EventDetail';
 import EventsList from './components/events/EventsList';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, MutableRefObject, RefObject } from 'react';
 import React from 'react';
-import { Langs } from './const/langs';
 import Calendar from './components/calendar/Calendar';
-
+import Intro from './components/intro/Intro';
+import Footer from './components/footer/Footer';
 
 function App() {
+  const useIsVisible = (ref: RefObject<HTMLElement | null>) => {
+    const [isIntersecting, setIntersecting] = useState(false);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        setIntersecting(entry.isIntersecting)
+      }
+      );
+
+      observer.observe(ref.current as Element);
+      return () => {
+        observer.disconnect();
+      };
+    }, [ref]);
+
+    return isIntersecting;
+  }
+
   const [events, setEvents] = useState<EventDetail[]>([])
-  const [lang, setLang] = useState("en")
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/events")
@@ -20,95 +37,36 @@ function App() {
       })
   }, [])
 
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const ref1 = useRef<HTMLElement>(null)
+  const isVisible1 = useIsVisible(ref1);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  const ref2 = useRef<HTMLElement>(null)
+  const isVisible2 = useIsVisible(ref2);
 
-  const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-    setLang((event.target as HTMLButtonElement).id);
-    setOpen(false);
-  };
+  const ref3 = useRef<HTMLElement>(null)
+  const isVisible3 = useIsVisible(ref3);
 
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
+  const ref4 = useRef<HTMLElement>(null)
+  const isVisible4 = useIsVisible(ref3);
 
   return (
     <div className="App w-full">
-      <div className='flex justify-end'>
-        <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          Language
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <MenuItem onClick={handleClose} id="en">English</MenuItem>
-                    <MenuItem onClick={handleClose} id="jp">日本語</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+      <div ref={ref1 as React.RefObject<HTMLDivElement>} className={`transition-opacity ease-in duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+        <Intro></Intro>
       </div>
-      <EventsList
-        {...{ events: events, lang: lang as Langs }}
-      ></EventsList>
-      <Calendar
-        {...{ lang: lang as Langs }}
-      ></Calendar>
+      <div ref={ref2 as React.RefObject<HTMLDivElement>} className={`transition-opacity ease-in duration-700 ${isVisible2 ? "opacity-100" : "opacity-0"}`}>
+
+        <EventsList
+          {...{ events: events }}
+        ></EventsList>
+      </div>
+      <div ref={ref3 as React.RefObject<HTMLDivElement>} className={`transition-opacity ease-in duration-700 ${isVisible3 ? "opacity-100" : "opacity-0"}`}>
+        <Calendar
+        ></Calendar>
+      </div>
+      <div ref={ref4 as React.RefObject<HTMLDivElement>} className={`transition-opacity ease-in duration-700 ${isVisible4 ? "opacity-100" : "opacity-0"}`}>
+        <Footer></Footer>
+      </div>
     </div >
   );
 }

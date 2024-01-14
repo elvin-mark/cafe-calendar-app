@@ -1,6 +1,7 @@
 export interface EventDetail {
     title: string,
     description: string,
-    date: string,
-    image: string,
+    date: Date,
+    poster: string,
+    fee: string
 };

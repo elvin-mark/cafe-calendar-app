@@ -38,8 +38,8 @@ function EventItem({ event }: { event: EventDetail }) {
             <CardMedia
                 sx={{ height: 140 }}
                 component='img'
-                src={`data:image/jpg;base64, ${event.image}`}
-                title="piano_image"
+                src={`data:image/jpg;base64, ${event.poster}`}
+                title="poster_image"
             ></CardMedia>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
