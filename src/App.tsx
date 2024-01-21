@@ -6,6 +6,7 @@ import React from 'react';
 import Calendar from './components/calendar/Calendar';
 import Intro from './components/intro/Intro';
 import Footer from './components/footer/Footer';
+import { fetchEvents } from './services/API';
 
 function App() {
   const useIsVisible = (ref: RefObject<HTMLElement | null>) => {
@@ -29,10 +30,8 @@ function App() {
   const [events, setEvents] = useState<EventDetail[]>([])
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/events")
-      .then((res) => res.json())
+    fetchEvents()
       .then((data: EventDetail[]) => {
-        console.log(data);
         setEvents(data)
       })
   }, [])

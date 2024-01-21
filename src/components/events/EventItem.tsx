@@ -3,8 +3,11 @@
 import { Card, CardContent, CardMedia, CardActions, Typography, Button, Box, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import { EventDetail } from '../../core/EventDetail';
+import ShareIcon from '@mui/icons-material/Share';
+import { Edit } from '@mui/icons-material';
 
-function EventItem({ event }: { event: EventDetail }) {
+
+function EventItem({ event, learnMore }: { event: EventDetail, learnMore: Function }) {
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const togglePopup = () => {
@@ -50,8 +53,8 @@ function EventItem({ event }: { event: EventDetail }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
+                <Button size="small"><ShareIcon /></Button>
+                <Button size="small" onClick={() => learnMore()}>More</Button>
             </CardActions>
         </Card>
     )
